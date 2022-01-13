@@ -7,11 +7,10 @@ const fetchData = async () => {
     const {
       data: {
         response: {
-          body: { items },
+          body: { items: dustData },
         },
       },
     } = await axios.get('http://localhost:3065/dust');
-    const dustData = items[0];
     console.log(dustData);
   } catch (err) {
     console.error(err);

@@ -1,13 +1,11 @@
 const express = require('express');
 const axios = require('axios');
-const dayjs = require('dayjs')
 const dotenv = require('dotenv');
 dotenv.config();
 
 const router = express.Router();
 
-const threeDaysAgo = dayjs().subtract(3, 'day').format('YYYY-MM-DD')
-const dustURL = `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustWeekFrcstDspth?searchDate=${threeDaysAgo}&returnType=json&serviceKey=${process.env.DUST_KEY}&numOfRows=100&pageNo=1`;
+const dustURL = `http://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureLIst?itemCode=PM10&dataGubun=DAILY&searchCondition=MONTH&pageNo=1&numOfRows=100&returnType=json&serviceKey=${process.env.DUST_KEY}`;
 
 router.get('/', async (req, res, next) => {
   try {
