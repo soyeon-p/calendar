@@ -1,5 +1,5 @@
 import { Container } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
 const fetchData = async () => {
@@ -18,9 +18,15 @@ const fetchData = async () => {
 };
 
 const Dust = () => {
-  fetchData();
+  useEffect(() => {
+    fetchData();
+  }, [])
 
-  return <Container>Dust</Container>;
+  return (
+    <Container>
+      Dust
+    </Container>
+  );
 };
 
 export default Dust;
