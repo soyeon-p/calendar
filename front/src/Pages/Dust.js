@@ -1,30 +1,43 @@
 import { Container } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Filter from '../Components/Dust/Filter';
+import Content from '../Components/Dust/Content';
 
-const fetchData = async () => {
-  try {
-    const {
-      data: {
-        response: {
-          body: { items: dustData },
-        },
-      },
-    } = await axios.get('http://localhost:3065/dust');
-    console.log(dustData);
-  } catch (err) {
-    console.error(err);
-  }
-};
+/*
+0 ~ 30 좋음
+31 ~ 80 보통
+81 ~ 150 나쁨
+151이상 매우나쁨
+*/
 
 const Dust = () => {
+  const [dustData, setDustData] = useState([]);
+
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const {
+          data: {
+            response: {
+              body: { items: dustData },
+            },
+          },
+        } = await axios.get('http://localhost:3065/dust');
+        setDustData(dustData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
     fetchData();
-  }, [])
+  }, []);
 
   return (
     <Container>
-      Dust
+      <Filter dustData={dustData} />
+
+      <Content dustData={dustData} />
     </Container>
   );
 };

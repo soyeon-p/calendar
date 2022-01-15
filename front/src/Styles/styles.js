@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 
 const drawerWidth = 100;
+const cardWidth = 200;
 
 export const useStyles = makeStyles((theme) => {
   return {
@@ -22,11 +23,11 @@ export const useStyles = makeStyles((theme) => {
     },
     link: {
       textDecoration: 'none',
-      color: theme.palette.primary.dark
+      color: theme.palette.primary.dark,
     },
 
     component: {
-      width: '100%'
+      width: '100%',
     },
     offset: theme.mixins.toolbar,
     page: {
@@ -34,5 +35,29 @@ export const useStyles = makeStyles((theme) => {
       padding: theme.spacing(2),
     },
 
+    // component
+    box: {
+      border: `1px solid #D9D9D9`,
+      padding: '10px',
+      borderRadius: '10px',
+      marginBottom: theme.spacing(3),
+    },
+
+    fab: {
+      marginRight: `${theme.spacing(1)}px !important`,
+    },
+
+    formControl: {
+      width: 300,
+      marginRight: `${theme.spacing(3)}px !important`,
+    },
+
+    card: {
+      maxWidth: cardWidth,
+    },
+
+    radioGroup: {
+      width: 100,
+    },
   };
 });

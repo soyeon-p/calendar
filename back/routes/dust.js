@@ -5,7 +5,7 @@ dotenv.config();
 
 const router = express.Router();
 
-const dustURL = `http://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureLIst?itemCode=PM10&dataGubun=DAILY&searchCondition=MONTH&pageNo=1&numOfRows=100&returnType=json&serviceKey=${process.env.DUST_KEY}`;
+const dustURL = `http://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureLIst?itemCode=PM10&dataGubun=DAILY&searchCondition=WEEK&pageNo=1&numOfRows=100&returnType=json&serviceKey=${process.env.DUST_KEY}`;
 
 router.get('/', async (req, res, next) => {
   try {
