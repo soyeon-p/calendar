@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Filter from '../Components/Dust/Filter';
 import Content from '../Components/Dust/Content';
+import { useRecoilState } from 'recoil';
+import { dustDataState } from '../Recoil/atoms';
 
 /*
 0 ~ 30 좋음
@@ -12,7 +14,7 @@ import Content from '../Components/Dust/Content';
 */
 
 const Dust = () => {
-  const [dustData, setDustData] = useState([]);
+  const [dustData, setDustData] = useRecoilState(dustDataState);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,13 +33,12 @@ const Dust = () => {
     };
 
     fetchData();
-  }, []);
+  }, [setDustData]);
 
   return (
     <Container>
-      <Filter dustData={dustData} />
-
-      <Content dustData={dustData} />
+      <Filter />
+      <Content />
     </Container>
   );
 };

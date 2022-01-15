@@ -6,29 +6,36 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { dustDataState, selectedCityState } from '../../Recoil/atoms';
 import { useStyles } from '../../Styles/styles';
 
-const Content = ({ dustData }) => {
+const Content = () => {
   const classes = useStyles();
-  console.log(dustData);
+  const dustData = useRecoilValue(dustDataState)
+  const selectedCity = useRecoilValue(selectedCityState);
 
   return (
     <>
-      <Typography variant="subtitle1" color="textSecondary">
-        Seoul
-      </Typography>
-      <Grid container spacing={3}>
-        {dustData.map((dustCard) => (
-          <Grid item key={dustCard.dataTime}>
-            <Card className={classes.card}>
-              <CardHeader avatar="bed" title={dustCard.dataTime} />
-              <CardContent>
-                <Typography>22pm10</Typography>
-              </CardContent>
-            </Card>
+      {selectedCity && (
+        <>
+          <Typography variant="h4" color="primary">
+            {selectedCity}
+          </Typography>
+          <Grid container spacing={3}>
+            {dustData.map((dustCard) => (
+              <Grid item key={dustCard.dataTime}>
+                <Card className={classes.card}>
+                  <CardHeader avatar="Dust" title={dustCard.dataTime} />
+                  <CardContent>
+                    <Typography>{dustCard[selectedCity]}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        </>
+      )}
     </>
   );
 };
