@@ -43,8 +43,9 @@ export const useStyles = makeStyles((theme) => {
       marginBottom: theme.spacing(3),
     },
 
-    fab: {
-      marginRight: `${theme.spacing(1)}px !important`,
+    filter: {
+      display: 'flex',
+      alignItems: 'center'
     },
 
     formControl: {
@@ -59,5 +60,9 @@ export const useStyles = makeStyles((theme) => {
     radioGroup: {
       width: 100,
     },
+
+    resetButton: {
+      height: '100%'
+    }
   };
 });

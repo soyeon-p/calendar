@@ -7,5 +7,5 @@ export const dustDataState = atom({
 
 export const selectedCityState = atom({
   key: 'selectedCityState',
-  default: null
+  default: ''
 })
