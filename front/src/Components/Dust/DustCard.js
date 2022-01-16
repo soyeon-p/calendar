@@ -9,17 +9,14 @@ import React from 'react';
 import { useStyles } from '../../Styles/styles';
 
 const DustCard = ({ dustData }) => {
-  const {dust, dataTime, avatar} = dustData
+  const { dust, dataTime, avatar } = dustData;
   const classes = useStyles(dustData);
 
   return (
     <>
       <Grid item>
         <Card className={classes.card}>
-          <CardHeader
-            avatar={avatar}
-            title={dataTime}
-          />
+          <CardHeader avatar={avatar} title={dataTime} />
           <CardContent>
             <Typography>{dust}</Typography>
           </CardContent>
