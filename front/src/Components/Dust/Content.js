@@ -2,12 +2,12 @@ import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { selectedCityState } from '../../Recoil/atoms';
-import { dustFilterCityListState } from '../../Recoil/selectors';
+import { dustFilterListState } from '../../Recoil/selectors';
 import DustCard from './DustCard';
 
 const Content = () => {
   const selectedCity = useRecoilValue(selectedCityState);
-  const dustFilterList = useRecoilValue(dustFilterCityListState)
+  const dustFilterList = useRecoilValue(dustFilterListState);
 
   return (
     <>
@@ -18,10 +18,7 @@ const Content = () => {
           </Typography>
           <Grid container spacing={3}>
             {dustFilterList.map((dustCard) => (
-              <DustCard
-                key={dustCard.dataTime}
-                dustData={dustCard}
-              />
+              <DustCard key={dustCard.dataTime} dustData={dustCard} />
             ))}
           </Grid>
         </>

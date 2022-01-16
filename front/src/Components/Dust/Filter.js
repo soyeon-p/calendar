@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import React, { useCallback } from 'react';
 import { useRecoilState, useResetRecoilState } from 'recoil';
-import { selectedCityState } from '../../Recoil/atoms';
+import { selectedCityState, selectedDustState } from '../../Recoil/atoms';
 import { useStyles } from '../../Styles/styles';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 
@@ -40,7 +40,10 @@ const cityData = [
 const Filter = () => {
   const classes = useStyles();
   const [selectedCity, setSelectedCity] = useRecoilState(selectedCityState);
+  const [selectedState, setSelectedState] = useRecoilState(selectedDustState)
   const cityReset = useResetRecoilState(selectedCityState);
+  const dustRest = useResetRecoilState(selectedDustState)
+
 
   const onChangeCity = useCallback(
     (e) => {
@@ -49,10 +52,15 @@ const Filter = () => {
     [setSelectedCity]
   );
 
+  const onChangeDustState = useCallback((e) => {
+    console.log(e.target.value)
+    setSelectedState(e.target.value)
+  }, [setSelectedState])
+
   const onFilterReset = useCallback(() => {
     cityReset();
-    // 미세먼지 정도 리셋()
-  }, [cityReset]);
+    dustRest()
+  }, [cityReset, dustRest]);
 
   return (
     <Box className={classes.box}>
@@ -71,16 +79,17 @@ const Filter = () => {
         </FormControl>
         <FormControl component="fieldset">
           <FormLabel component="legend">Dust alert</FormLabel>
-          <RadioGroup aria-label="dust" control={<Radio />} name="dust">
-            <FormControlLabel value="good" control={<Radio />} label="좋음" />
+          <RadioGroup aria-label="dust" value={selectedState} control={<Radio />} name="dust" onChange={onChangeDustState}>
+            <FormControlLabel value="모두" control={<Radio />} label="모두" />
+            <FormControlLabel value="좋음" control={<Radio />} label="좋음" />
             <FormControlLabel
-              value="average"
+              value="보통"
               control={<Radio />}
               label="보통"
             />
-            <FormControlLabel value="bad" control={<Radio />} label="나쁨" />
+            <FormControlLabel value="나쁨" control={<Radio />} label="나쁨" />
             <FormControlLabel
-              value="veryBad"
+              value="매우 나쁨"
               control={<Radio />}
               label="매우 나쁨"
             />

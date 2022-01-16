@@ -9,3 +9,8 @@ export const selectedCityState = atom({
   key: 'selectedCityState',
   default: ''
 })
+
+export const selectedDustState = atom({
+  key: 'selectedDustState',
+  default: ''
+})
