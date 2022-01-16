@@ -3,6 +3,14 @@ import { makeStyles } from '@material-ui/core';
 const drawerWidth = 100;
 const cardWidth = 200;
 
+export const dataColor = {
+  purple: '#814BA6',
+  green: '#a5d6a7',
+  blue: '#035AA6',
+  orange: '#FE762D',
+  red: '#f44336',
+};
+
 export const useStyles = makeStyles((theme) => {
   return {
     root: {
@@ -45,7 +53,7 @@ export const useStyles = makeStyles((theme) => {
 
     filter: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
 
     formControl: {
@@ -62,7 +70,7 @@ export const useStyles = makeStyles((theme) => {
     },
 
     resetButton: {
-      height: '100%'
-    }
+      height: '100%',
+    },
   };
 });
