@@ -14,7 +14,7 @@ import { dustDataState } from '../Recoil/atoms';
 */
 
 const Dust = () => {
-  const [dustData, setDustData] = useRecoilState(dustDataState);
+  const [, setDustData] = useRecoilState(dustDataState);
 
   useEffect(() => {
     const fetchData = async () => {
