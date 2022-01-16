@@ -2,6 +2,8 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { Box } from '@material-ui/core';
+import { useStyles } from '../../Styles/styles';
 
 const events = [
   {
@@ -16,12 +18,14 @@ const events = [
     start: '2022-01-11T12:00:00',
     end: '2022-01-11T15:00:00',
   },
-  { id: 3, title: 'event 3', start: '2022-01-18', end: '2022-01-20' },
+  // { id: 3, title: 'event 3', start: '2022-01-18', end: '2022-01-20' },
 ];
 
-function Calendar2() {
+function Calendar() {
+  const classes = useStyles()
+  
   return (
-    <div className="App">
+    <Box className={classes.box}>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
@@ -40,8 +44,8 @@ function Calendar2() {
         dateClick={(e) => console.log(e.dateStr)}
         eventClick={(e) => console.log(e.event.id)}
       />
-    </div>
+    </Box>
   );
 }
 
-export default Calendar2;
+export default Calendar;

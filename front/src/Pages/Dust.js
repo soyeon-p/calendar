@@ -1,5 +1,5 @@
 import { Container } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import Filter from '../Components/Dust/Filter';
 import Content from '../Components/Dust/Content';

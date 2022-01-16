@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from '@material-ui/core';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './Components/Layout';
-import { theme } from './Styles/Theme';
+import { theme } from './Styles/theme';
 import Home from './Pages/Home';
 import Dust from './Pages/Dust';
 import Weather from './Pages/Weather';
