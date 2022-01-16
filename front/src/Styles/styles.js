@@ -72,5 +72,6 @@ export const useStyles = makeStyles((theme) => {
     resetButton: {
       height: '100%',
     },
+
   };
 });
