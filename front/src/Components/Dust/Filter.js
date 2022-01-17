@@ -53,7 +53,6 @@ const Filter = () => {
   );
 
   const onChangeDustState = useCallback((e) => {
-    console.log(e.target.value)
     setSelectedState(e.target.value)
   }, [setSelectedState])
 

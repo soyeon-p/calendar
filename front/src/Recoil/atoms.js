@@ -14,3 +14,8 @@ export const selectedDustState = atom({
   key: 'selectedDustState',
   default: ''
 })
+
+export const toggleModalState = atom({
+  key: 'toggleModalState',
+  default: false
+})
