@@ -14,7 +14,7 @@ export default function TodoTime() {
         <TimePicker
           renderInput={(params) => <TextField {...params} />}
           value={value}
-          label="min/max time"
+          label="시작 시간"
           onChange={(newValue) => {
             setValue(newValue);
           }}
@@ -23,7 +23,7 @@ export default function TodoTime() {
         />
         <TimePicker
           renderInput={(params) => <TextField {...params} />}
-          label="Disable odd hours"
+          label="종료 시간"
           value={value}
           onChange={(newValue) => {
             setValue(newValue);

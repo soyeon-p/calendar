@@ -32,13 +32,7 @@ function Calendar() {
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         headerToolbar={{
-          center: "dayGridMonth,timeGridWeek,timeGridDay new",
-        }}
-        customButtons={{
-          new: {
-            text: "new",
-            click: () => console.log("new event"),
-          },
+          center: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
         events={events}
         eventColor="red"
@@ -48,7 +42,7 @@ function Calendar() {
         }}
         eventClick={(e) => {}}
       />
-      {isClickDay ? <CalendarModal /> : <></>} ;
+      {isClickDay ? <CalendarModal /> : <></>}
     </Box>
   );
 }
