@@ -10,26 +10,23 @@ import {
   toggleModalState,
 } from "../../../Recoil/atoms";
 
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+  useResetRecoilState,
+} from "recoil";
 
 export default function EventCreate() {
   const [newEvent, setNewEvent] = useRecoilState(newEventState);
-  const newEventTitleInput = useRecoilValue(newEventTitleInputState);
-  const setSelectedDate = useSetRecoilState(selectedDateState);
   const setEventList = useSetRecoilState(eventListState);
   const setToggleModal = useSetRecoilState(toggleModalState);
-
+  const resetNewEvent = useResetRecoilState(newEventState);
+  const resetSelectedDate = useResetRecoilState(selectedDateState);
   const onSubmit = useCallback((e) => {
-    const addNewEvent = () => {
-      setNewEvent((prev) => ({
-        ...prev,
-        id: Date.now(),
-      }));
-    };
-
-    addNewEvent();
-    console.log("newInput:" + newEvent.title);
     setEventList((prev) => [...prev, newEvent]);
+    resetNewEvent();
+    resetSelectedDate();
     setToggleModal((prev) => !prev);
   });
 

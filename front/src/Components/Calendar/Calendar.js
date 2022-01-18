@@ -6,11 +6,12 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { Box } from "@material-ui/core";
 import { useStyles } from "../../Styles/styles";
 import CalendarModal from "./CalendarModal";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   toggleModalState,
   selectedDateState,
   eventListState,
+  newEventState,
 } from "../../Recoil/atoms";
 
 const events = [
@@ -34,14 +35,11 @@ function Calendar() {
   const [toggleModal, setToggleModal] = useRecoilState(toggleModalState);
   const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
   const [eventList, setEventList] = useRecoilState(eventListState);
+  const newEvent = useRecoilValue(newEventState);
 
   const onToggleModal = useCallback(() => {
     setToggleModal((prev) => !prev);
   }, [setToggleModal]);
-
-  eventList.map((event) => {
-    return console.log(event);
-  });
 
   return (
     <Box className={classes.box}>

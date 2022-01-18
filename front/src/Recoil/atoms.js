@@ -33,12 +33,7 @@ export const selectedDateState = atom({
 
 export const newEventState = atom({
   key: "newEventState",
-  default: {
-    id: "",
-    title: "event 1",
-    start: "2022-01-01T12:00",
-    end: "2022-01-01T14:00",
-  },
+  default: {},
 });
 
 export const newEventTitleInputState = atom({

@@ -14,6 +14,7 @@ export default function EventFormat() {
   const onChange = (e) => {
     setNewEvent((prev) => ({
       ...prev,
+      id: Date.now(),
       title: e.target.value,
     }));
   };
