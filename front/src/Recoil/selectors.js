@@ -1,6 +1,10 @@
 import { Typography } from '@material-ui/core';
 import { selector } from 'recoil';
-import { dustDataState, selectedCityState, selectedDustState } from './atoms';
+import {
+  dustDataState,
+  selectedCityState,
+  selectedDustState,
+} from './atoms';
 
 export const dustFilterListState = selector({
   key: 'dustFilterCityListState',

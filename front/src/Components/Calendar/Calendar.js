@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -6,12 +6,14 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { Box } from "@material-ui/core";
 import { useStyles } from "../../Styles/styles";
 import CalendarModal from "./CalendarModal";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import {
   toggleModalState,
   selectedDateState,
   eventListState,
-  newEventState,
+  eventStartTimeState,
+  eventEndTimeState,
+  eventTitleState,
 } from "../../Recoil/atoms";
 
 const events = [
@@ -33,13 +35,23 @@ const events = [
 function Calendar() {
   const classes = useStyles();
   const [toggleModal, setToggleModal] = useRecoilState(toggleModalState);
-  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
-  const [eventList, setEventList] = useRecoilState(eventListState);
-  const newEvent = useRecoilValue(newEventState);
+  const [, setSelectedDate] = useRecoilState(selectedDateState);
+  const eventList = useRecoilValue(eventListState);
+  const resetTitle = useResetRecoilState(eventTitleState);
+  const resetStartTime = useResetRecoilState(eventStartTimeState);
+  const resetEndTime = useResetRecoilState(eventEndTimeState);
 
   const onToggleModal = useCallback(() => {
     setToggleModal((prev) => !prev);
   }, [setToggleModal]);
+
+  useEffect(() => {
+    if (!toggleModal) {
+      resetTitle();
+      resetStartTime();
+      resetEndTime();
+    }
+  }, [toggleModal, resetTitle, resetStartTime, resetEndTime]);
 
   return (
     <Box className={classes.box}>

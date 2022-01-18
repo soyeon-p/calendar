@@ -1,23 +1,19 @@
-import { React, useState, useCallback } from "react";
+import { React } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import EventTime from "./EventTime";
 import EventCreate from "./EventCreate";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { selectedDateState, newEventState } from "../../../Recoil/atoms";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { eventTitleState } from "../../../Recoil/atoms";
+import { useRecoilState } from "recoil";
 
 export default function EventFormat() {
-  const selectedDate = useRecoilValue(selectedDateState);
-  const [newEvent, setNewEvent] = useRecoilState(newEventState);
+  const [, setTitle] = useRecoilState(eventTitleState);
   const onChange = (e) => {
-    setNewEvent((prev) => ({
-      ...prev,
-      id: Date.now(),
-      title: e.target.value,
-    }));
+    setTitle(e.target.value);
   };
+
   return (
     <Box
       component="form"
@@ -37,6 +33,7 @@ export default function EventFormat() {
           label="오늘 할 일"
           color="primary"
           focused
+          required
           onChange={onChange}
         />
         <EventTime />

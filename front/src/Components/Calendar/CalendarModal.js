@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { toggleModalState } from "../../Recoil/atoms";
 import EventFormat from "./CalendarModal/EventFormat";
