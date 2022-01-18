@@ -5,19 +5,17 @@ import EventTime from "./EventTime";
 import EventCreate from "./EventCreate";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import {
-  selectedDateState,
-  newEventState,
-  newEventTitleInputState,
-} from "../../../Recoil/atoms";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { selectedDateState, newEventState } from "../../../Recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 export default function EventFormat() {
   const selectedDate = useRecoilValue(selectedDateState);
   const [newEvent, setNewEvent] = useRecoilState(newEventState);
-  const setNewEventTitleInput = useSetRecoilState(newEventTitleInputState);
   const onChange = (e) => {
-    setNewEventTitleInput(e.target.value);
+    setNewEvent((prev) => ({
+      ...prev,
+      title: e.target.value,
+    }));
   };
   return (
     <Box
@@ -49,9 +47,9 @@ export default function EventFormat() {
           paddingTop: "10px",
         }}
       >
-        <Button size="small" variant="contained" color="error">
+        {/* <Button size="small" variant="contained" color="error">
           삭제
-        </Button>
+        </Button> */}
         <EventCreate />
       </Stack>
     </Box>

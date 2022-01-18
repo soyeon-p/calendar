@@ -1,7 +1,4 @@
 import { React, useState, useCallback } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import EventTime from "./EventTime";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
@@ -22,18 +19,19 @@ export default function EventCreate() {
   const setEventList = useSetRecoilState(eventListState);
   const setToggleModal = useSetRecoilState(toggleModalState);
 
-  const onSubmit = (e) => {
+  const onSubmit = useCallback((e) => {
     const addNewEvent = () => {
       setNewEvent((prev) => ({
         ...prev,
-        title: newEventTitleInput,
+        id: Date.now(),
       }));
     };
 
     addNewEvent();
+    console.log("newInput:" + newEvent.title);
     setEventList((prev) => [...prev, newEvent]);
     setToggleModal((prev) => !prev);
-  };
+  });
 
   return (
     <Stack
