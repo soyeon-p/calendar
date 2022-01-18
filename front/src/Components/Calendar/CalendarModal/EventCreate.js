@@ -1,44 +1,68 @@
-import { React, useState, useCallback } from "react";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-
+import { React, useCallback, useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import {
   selectedDateState,
-  newEventState,
-  eventListState,
-  newEventTitleInputState,
   toggleModalState,
-} from "../../../Recoil/atoms";
+  eventListState,
+  eventTitleState,
+  eventStartTimeState,
+  eventEndTimeState,
+} from '../../../Recoil/atoms';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+const calcTime = (time) => {
+  return new Date(time - time.getTimezoneOffset() * 60000)
+    .toISOString()
+    .slice(10, 16);
+};
 
 export default function EventCreate() {
-  const [newEvent, setNewEvent] = useRecoilState(newEventState);
-  const newEventTitleInput = useRecoilValue(newEventTitleInputState);
-  const setSelectedDate = useSetRecoilState(selectedDateState);
-  const setEventList = useSetRecoilState(eventListState);
+  const [eventList, setEventList] = useRecoilState(eventListState);
+  const eventTitle = useRecoilValue(eventTitleState);
+  const eventStartTime = useRecoilValue(eventStartTimeState);
+  const eventEndTime = useRecoilValue(eventEndTimeState);
+  const selectedDate = useRecoilValue(selectedDateState);
   const setToggleModal = useSetRecoilState(toggleModalState);
 
-  const onSubmit = useCallback((e) => {
-    const addNewEvent = () => {
-      setNewEvent((prev) => ({
-        ...prev,
-        id: Date.now(),
-      }));
-    };
+  const [disabled, setDisabled] = useState(true);
 
-    addNewEvent();
-    console.log("newInput:" + newEvent.title);
-    setEventList((prev) => [...prev, newEvent]);
+  useEffect(() => {
+    if (eventStartTime && eventEndTime && eventTitle) {
+      setDisabled(false)
+    } else {
+      setDisabled(true)
+    }
+  }, [eventStartTime, eventEndTime, eventTitle]);
+
+  const onSubmit = useCallback(() => {
+    setEventList([
+      ...eventList,
+      {
+        id: Date.now(),
+        title: eventTitle,
+        start: selectedDate + calcTime(eventStartTime),
+        end: selectedDate + calcTime(eventEndTime),
+      },
+    ]);
+
     setToggleModal((prev) => !prev);
-  });
+  }, [
+    eventTitle,
+    eventStartTime,
+    eventEndTime,
+    selectedDate,
+    eventList,
+    setEventList,
+    setToggleModal
+  ]);
 
   return (
     <Stack
       direction="row"
       spacing={2}
       sx={{
-        paddingTop: "10px",
+        paddingTop: '10px',
       }}
     >
       <Button
@@ -46,6 +70,7 @@ export default function EventCreate() {
         variant="contained"
         color="primary"
         onClick={onSubmit}
+        disabled={disabled}
       >
         추가
       </Button>

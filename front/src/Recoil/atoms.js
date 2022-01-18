@@ -21,37 +21,27 @@ export const toggleModalState = atom({
   default: false,
 });
 
-export const eventListState = atom({
-  key: "eventList",
-  default: [],
-});
-
 export const selectedDateState = atom({
   key: "selectedDateState",
   default: "",
 });
 
-export const newEventState = atom({
-  key: "newEventState",
-  default: {
-    id: "",
-    title: "event 1",
-    start: "2022-01-01T12:00",
-    end: "2022-01-01T14:00",
-  },
-});
-
-export const newEventTitleInputState = atom({
+export const eventTitleState = atom({
   key: "newEventTitleInput",
-  default: "",
+  default: null,
 });
 
-export const newEventStartTimeState = atom({
+export const eventStartTimeState = atom({
   key: "newEventStartTimeState",
-  default: {},
+  default: null
 });
 
-export const newEventEndTimeState = atom({
+export const eventEndTimeState = atom({
   key: "newEventEndTimeState",
-  default: {},
+  default: null
+});
+
+export const eventListState = atom({
+  key: "newEventState",
+  default: []
 });
