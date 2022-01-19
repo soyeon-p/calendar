@@ -14,6 +14,8 @@ import {
   eventStartTimeState,
   eventEndTimeState,
   eventTitleState,
+  eventClickState,
+  selectedEventIdState,
 } from "../../Recoil/atoms";
 
 const events = [
@@ -40,18 +42,46 @@ function Calendar() {
   const resetTitle = useResetRecoilState(eventTitleState);
   const resetStartTime = useResetRecoilState(eventStartTimeState);
   const resetEndTime = useResetRecoilState(eventEndTimeState);
+  const resetSelectedEventId = useResetRecoilState(selectedEventIdState);
+  const resetEventClick = useResetRecoilState(eventClickState);
+
+  const [eventClick, setEventClick] = useRecoilState(eventClickState);
+  const [, setTitle] = useRecoilState(eventTitleState);
+  const [, setStartTime] = useRecoilState(eventStartTimeState);
+  const [, setEndTime] = useRecoilState(eventEndTimeState);
+  const [, setSelectedEventId] = useRecoilState(selectedEventIdState);
 
   const onToggleModal = useCallback(() => {
     setToggleModal((prev) => !prev);
   }, [setToggleModal]);
+
+  const onClickEvent = useCallback(
+    (event) => {
+      setEventClick((prev) => !prev);
+      setSelectedEventId(event.id);
+      setTitle(event.title);
+      setStartTime(event.start);
+      setEndTime(event.end);
+    },
+    [setEventClick, setSelectedEventId, setTitle, setStartTime, setEndTime]
+  );
 
   useEffect(() => {
     if (!toggleModal) {
       resetTitle();
       resetStartTime();
       resetEndTime();
+      resetSelectedEventId();
+      resetEventClick();
     }
-  }, [toggleModal, resetTitle, resetStartTime, resetEndTime]);
+  }, [
+    toggleModal,
+    resetTitle,
+    resetStartTime,
+    resetEndTime,
+    resetSelectedEventId,
+    resetEventClick,
+  ]);
 
   return (
     <Box className={classes.box}>
@@ -69,7 +99,8 @@ function Calendar() {
           onToggleModal();
         }}
         eventClick={(e) => {
-          console.log(e.event);
+          onClickEvent(e.event);
+          onToggleModal();
         }}
       />
       {toggleModal ? <CalendarModal /> : null}

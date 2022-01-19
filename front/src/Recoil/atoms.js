@@ -28,7 +28,7 @@ export const selectedDateState = atom({
 
 export const eventTitleState = atom({
   key: "newEventTitleInput",
-  default: null,
+  default: "",
 });
 
 export const eventStartTimeState = atom({
@@ -44,4 +44,14 @@ export const eventEndTimeState = atom({
 export const eventListState = atom({
   key: "newEventState",
   default: [],
+});
+
+export const eventClickState = atom({
+  key: "eventClickState",
+  default: false,
+});
+
+export const selectedEventIdState = atom({
+  key: "selectedEventIdState",
+  default: null,
 });
