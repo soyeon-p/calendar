@@ -1,15 +1,18 @@
-import { React } from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import EventTime from './EventTime';
-import EventCreate from './EventCreate';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import { eventTitleState } from '../../../Recoil/atoms';
-import { useRecoilState } from 'recoil';
+import { React } from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import EventTime from "./EventTime";
+import EventCreate from "./EventCreate";
+import EventUpdate from "./EventUpdate";
+import EventDelete from "./EventDelete";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import { eventTitleState, eventClickState } from "../../../Recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 export default function EventFormat() {
-  const [, setTitle] = useRecoilState(eventTitleState);
+  const [title, setTitle] = useRecoilState(eventTitleState);
+  const eventClick = useRecoilValue(eventClickState);
   const onChange = (e) => {
     setTitle(e.target.value);
   };
@@ -18,11 +21,11 @@ export default function EventFormat() {
     <Box
       component="form"
       sx={{
-        '& > :not(style)': {
+        "& > :not(style)": {
           m: 1,
-          width: '25ch',
-          display: 'flex',
-          justifyContent: 'center',
+          width: "25ch",
+          display: "flex",
+          justifyContent: "center",
         },
       }}
       noValidate
@@ -34,6 +37,7 @@ export default function EventFormat() {
           color="primary"
           focused
           required
+          value={title}
           onChange={onChange}
         />
         <EventTime />
@@ -42,13 +46,17 @@ export default function EventFormat() {
         direction="row"
         spacing={2}
         sx={{
-          paddingTop: '10px',
+          paddingTop: "10px",
         }}
       >
-        {/* <Button size="small" variant="contained" color="error">
-          삭제
-        </Button> */}
-        <EventCreate />
+        {eventClick ? (
+          <>
+            <EventDelete />
+            <EventUpdate />
+          </>
+        ) : (
+          <EventCreate />
+        )}
       </Stack>
     </Box>
   );

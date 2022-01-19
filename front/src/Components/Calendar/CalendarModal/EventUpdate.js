@@ -8,6 +8,7 @@ import {
   eventTitleState,
   eventStartTimeState,
   eventEndTimeState,
+  selectedEventIdState,
 } from "../../../Recoil/atoms";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -17,12 +18,13 @@ const calcTime = (time) => {
     .slice(10, 16);
 };
 
-export default function EventCreate() {
+export default function EventUpdate() {
   const [eventList, setEventList] = useRecoilState(eventListState);
   const eventTitle = useRecoilValue(eventTitleState);
   const eventStartTime = useRecoilValue(eventStartTimeState);
   const eventEndTime = useRecoilValue(eventEndTimeState);
   const selectedDate = useRecoilValue(selectedDateState);
+  const selectedEventId = useRecoilValue(selectedEventIdState);
   const setToggleModal = useSetRecoilState(toggleModalState);
 
   const [disabled, setDisabled] = useState(true);
@@ -36,18 +38,22 @@ export default function EventCreate() {
   }, [eventStartTime, eventEndTime, eventTitle]);
 
   const onSubmit = useCallback(() => {
-    setEventList([
-      ...eventList,
-      {
-        id: Date.now(),
-        title: eventTitle,
-        start: selectedDate + calcTime(eventStartTime),
-        end: selectedDate + calcTime(eventEndTime),
-      },
-    ]);
+    setEventList(
+      eventList.map((event) =>
+        event.id.toString() === selectedEventId
+          ? {
+              ...event,
+              title: eventTitle,
+              start: selectedDate + calcTime(eventStartTime),
+              end: selectedDate + calcTime(eventEndTime),
+            }
+          : event
+      )
+    );
 
     setToggleModal((prev) => !prev);
   }, [
+    selectedEventId,
     eventTitle,
     eventStartTime,
     eventEndTime,
@@ -72,7 +78,7 @@ export default function EventCreate() {
         onClick={onSubmit}
         disabled={disabled}
       >
-        추가
+        수정
       </Button>
     </Stack>
   );
