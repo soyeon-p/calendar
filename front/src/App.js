@@ -8,16 +8,14 @@ import Dust from './Pages/Dust';
 import Weather from './Pages/Weather';
 import Corona from './Pages/Corona';
 import { RecoilRoot } from 'recoil';
-import Calendar from './Components/Calendar/Calendar';
 
 function App() {
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
         <Layout>
-          <Calendar/>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/Home" element={<Home />} />
             <Route path="/Weather" element={<Weather />} />
             <Route path="/Corona" element={<Corona />} />
             <Route path="/dust" element={<Dust />} />
