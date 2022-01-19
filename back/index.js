@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 
+const weatherRouter = require('./routes/weather');
 const dustRouter = require('./routes/dust');
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(
     extended: true,
   })
 );
+app.use('/weather', weatherRouter)
 app.use('/dust', dustRouter);
 
 app.listen(3065, () => {

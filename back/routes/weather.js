@@ -5,13 +5,11 @@ dotenv.config();
 
 const router = express.Router();
 
-const dustURL = `http://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureLIst?itemCode=PM10&dataGubun=DAILY&searchCondition=WEEK&pageNo=1&numOfRows=100&returnType=json&serviceKey=${process.env.API_KEY}`;
-
+const weatherURL = `http://apis.data.go.kr/1360000/AsosDalyInfoService/getWthrDataList?dataType=JSON&serviceKey=${process.env.API_KEY}&numOfRows=10&pageNo=1&dataCd=ASOS&dateCd=DAY&startDt=20210112&endDt=20210118&stnIds=108`;
 router.get('/', async (req, res, next) => {
   try {
-    const { data } = await axios.get(dustURL);
+    const {data} = await axios.get(weatherURL);
     res.json(data);
-
   } catch (err) {
     console.error(err);
     next(err);
