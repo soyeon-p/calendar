@@ -18,22 +18,6 @@ import {
   selectedEventIdState,
 } from "../../Recoil/atoms";
 
-const events = [
-  {
-    id: 1,
-    title: "event 1",
-    start: "2022-01-16T10:00:00",
-    end: "2022-01-16T12:00:00",
-  },
-  {
-    id: 2,
-    title: "event 2",
-    start: "2022-01-11T12:00:00",
-    end: "2022-01-11T15:00:00",
-  },
-  // { id: 3, title: 'event 3', start: '2022-01-18', end: '2022-01-20' },
-];
-
 function Calendar() {
   const classes = useStyles();
   const [toggleModal, setToggleModal] = useRecoilState(toggleModalState);
@@ -45,7 +29,7 @@ function Calendar() {
   const resetSelectedEventId = useResetRecoilState(selectedEventIdState);
   const resetEventClick = useResetRecoilState(eventClickState);
 
-  const [eventClick, setEventClick] = useRecoilState(eventClickState);
+  const [, setEventClick] = useRecoilState(eventClickState);
   const [, setTitle] = useRecoilState(eventTitleState);
   const [, setStartTime] = useRecoilState(eventStartTimeState);
   const [, setEndTime] = useRecoilState(eventEndTimeState);

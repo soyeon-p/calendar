@@ -1,4 +1,4 @@
-import { React, useCallback, useEffect, useState } from "react";
+import { React, useCallback } from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import {
@@ -10,12 +10,8 @@ import {
   eventEndTimeState,
 } from "../../../Recoil/atoms";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-
-const calcTime = (time) => {
-  return new Date(time - time.getTimezoneOffset() * 60000)
-    .toISOString()
-    .slice(10, 16);
-};
+import { calcEventTime } from "./CalcEventTime";
+import { ModalState } from "./ModalState";
 
 export default function EventCreate() {
   const [eventList, setEventList] = useRecoilState(eventListState);
@@ -25,15 +21,7 @@ export default function EventCreate() {
   const selectedDate = useRecoilValue(selectedDateState);
   const setToggleModal = useSetRecoilState(toggleModalState);
 
-  const [disabled, setDisabled] = useState(true);
-
-  useEffect(() => {
-    if (eventStartTime && eventEndTime && eventTitle) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [eventStartTime, eventEndTime, eventTitle]);
+  const disabled = ModalState(eventStartTime, eventEndTime, eventTitle)
 
   const onSubmit = useCallback(() => {
     setEventList([
@@ -41,8 +29,8 @@ export default function EventCreate() {
       {
         id: Date.now(),
         title: eventTitle,
-        start: selectedDate + calcTime(eventStartTime),
-        end: selectedDate + calcTime(eventEndTime),
+        start: selectedDate + calcEventTime(eventStartTime),
+        end: selectedDate + calcEventTime(eventEndTime),
       },
     ]);
 
