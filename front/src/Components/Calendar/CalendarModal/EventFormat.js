@@ -5,7 +5,6 @@ import EventTime from "./EventTime";
 import EventCreate from "./EventCreate";
 import EventUpdate from "./EventUpdate";
 import EventDelete from "./EventDelete";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { eventTitleState, eventClickState } from "../../../Recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
