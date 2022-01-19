@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import EventTime from "./EventTime";
 import EventCreate from "./EventCreate";
 import EventUpdate from "./EventUpdate";
+import EventDelete from "./EventDelete";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { eventTitleState, eventClickState } from "../../../Recoil/atoms";
@@ -48,10 +49,14 @@ export default function EventFormat() {
           paddingTop: "10px",
         }}
       >
-        {/* <Button size="small" variant="contained" color="error">
-          삭제
-        </Button> */}
-        {eventClick ? <EventUpdate /> : <EventCreate />}
+        {eventClick ? (
+          <>
+            <EventDelete />
+            <EventUpdate />
+          </>
+        ) : (
+          <EventCreate />
+        )}
       </Stack>
     </Box>
   );

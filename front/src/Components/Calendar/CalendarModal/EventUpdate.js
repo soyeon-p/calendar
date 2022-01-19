@@ -37,8 +37,6 @@ export default function EventUpdate() {
     }
   }, [eventStartTime, eventEndTime, eventTitle]);
 
-  console.log(typeof eventList[0].id);
-  console.log(typeof selectedEventId);
   const onSubmit = useCallback(() => {
     setEventList(
       eventList.map((event) =>
