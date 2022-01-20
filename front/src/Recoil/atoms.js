@@ -17,7 +17,12 @@ export const selectedDustState = atom({
 
 export const weatherDataState = atom({
   key: 'weatherDataState',
-  default: [],
+  default: null,
+})
+
+export const weatherValueState = atom({
+  key: 'weatherValueState',
+  default: null
 })
 
 //일정 모달창

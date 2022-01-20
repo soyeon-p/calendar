@@ -16,6 +16,7 @@ import { useRecoilState, useResetRecoilState } from 'recoil';
 import { selectedCityState, selectedDustState } from '../../Recoil/atoms';
 import { useStyles } from '../../Styles/styles';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
+import dayjs from 'dayjs';
 
 const cityData = [
   'busan',
@@ -44,7 +45,6 @@ const Filter = () => {
   const cityReset = useResetRecoilState(selectedCityState);
   const dustRest = useResetRecoilState(selectedDustState)
 
-
   const onChangeCity = useCallback(
     (e) => {
       setSelectedCity(e.target.value);
@@ -63,7 +63,7 @@ const Filter = () => {
 
   return (
     <Box className={classes.box}>
-      <Typography variant="subtitle1">2022-01-15</Typography>
+      <Typography variant="subtitle1">{dayjs().format('YYYY-MM-DD')}</Typography>
       <Typography variant="h5">Filter</Typography>
       <div className={classes.filter}>
         <FormControl className={classes.formControl}>
@@ -78,7 +78,13 @@ const Filter = () => {
         </FormControl>
         <FormControl component="fieldset">
           <FormLabel component="legend">Dust alert</FormLabel>
-          <RadioGroup aria-label="dust" value={selectedState} control={<Radio />} name="dust" onChange={onChangeDustState}>
+          <RadioGroup 
+            aria-label="dust"
+            value={selectedState}
+            control={<Radio />}
+            name="dust"
+            onChange={onChangeDustState}
+          >
             <FormControlLabel value="모두" control={<Radio />} label="모두" />
             <FormControlLabel value="좋음" control={<Radio />} label="좋음" />
             <FormControlLabel

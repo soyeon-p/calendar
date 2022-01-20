@@ -10,19 +10,17 @@ import { useStyles } from '../../Styles/styles';
 
 const DustCard = ({ dustData }) => {
   const { dust, dataTime, avatar } = dustData;
-  const classes = useStyles(dustData);
+  const classes = useStyles();
 
   return (
-    <>
-      <Grid item>
-        <Card className={classes.card}>
-          <CardHeader avatar={avatar} title={dataTime} />
-          <CardContent>
-            <Typography>{dust}</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-    </>
+    <Grid item>
+      <Card className={classes.card}>
+        <CardHeader avatar={avatar} title={dataTime} />
+        <CardContent>
+          <Typography>{dust}</Typography>
+        </CardContent>
+      </Card>
+    </Grid>
   );
 };
 
