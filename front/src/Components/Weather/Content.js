@@ -1,23 +1,28 @@
 import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { weatherDataState } from '../../Recoil/atoms';
+import { weatherDataState, weatherValueState } from '../../Recoil/atoms';
 import WeatherCard from './WeatherCard';
+import { temperatureList } from './WeatherList';
+
+
 
 const Content = () => {
   const weatherData = useRecoilValue(weatherDataState);
-  console.log(weatherData);
+  const weatherValue = useRecoilValue(weatherValueState);
 
   return (
     <>
       {weatherData && (
         <>
           <Typography variant="h4" color="primary">
-            평균 기온({weatherData[0].stnNm})
+            {`${temperatureList.find((data) => data.value === weatherValue.temperature).title} (${
+              weatherValue.cityName
+            })`}
           </Typography>
           <Grid container spacing={3}>
             {weatherData.map((weather) => (
-              <WeatherCard key={weather.tm} weatherData={weather}  />
+              <WeatherCard key={weather.tm} weatherData={weather} />
             ))}
           </Grid>
         </>

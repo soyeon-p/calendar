@@ -20,6 +20,11 @@ export const weatherDataState = atom({
   default: null,
 })
 
+export const weatherValueState = atom({
+  key: 'weatherValueState',
+  default: null
+})
+
 //일정 모달창
 export const toggleModalState = atom({
   key: "toggleModalState",
