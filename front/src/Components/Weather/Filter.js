@@ -34,24 +34,14 @@ const cityList = [
 
 const Filter = () => {
   const classes = useStyles();
-  const [weatherData, setWeatherData] = useRecoilState(weatherDataState);
+  const [,setWeatherData] = useRecoilState(weatherDataState);
   const [cityCode, setCityCode] = useState('');
 
   const onChangeCity = useCallback((e) => {
     setCityCode(e.target.value);
   }, []);
 
-  const onSubmit = useCallback((e) => {
-    const postData = async () => {
-      try {
-        await axios.post('http://localhost:3065/weather', {
-          cityCode,
-        });
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
+  const onSubmit = useCallback((e) => {    
     const fetchData = async () => {
       const {
         data: {
@@ -61,16 +51,16 @@ const Filter = () => {
             },
           },
         },
-      } = await axios('http://localhost:3065/weather/city');
+      } = await axios.post('http://localhost:3065/weather/city', {
+        cityCode,
+      });
       setWeatherData(weatherData);
     };
 
     e.preventDefault();
-    postData();
     fetchData();
-    },
-    [cityCode, setWeatherData]
-  );
+    setCityCode('')
+  }, [cityCode, setWeatherData]);
 
   return (
     <Box className={classes.box}>
@@ -88,7 +78,7 @@ const Filter = () => {
               ))}
             </Select>
           </FormControl>
-          <Button type="submit">Select</Button>
+          <Button type="submit" variant='contained' color='primary'>Select</Button>
         </form>
       </div>
     </Box>

@@ -8,20 +8,20 @@ import {
 import React from 'react';
 import { useStyles } from '../../Styles/styles';
 
-const DustCard = ({ dustData }) => {
-  const { dust, dataTime, avatar } = dustData;
+const WeatherCard = ({ weatherData }) => {
+  const {tm, avgTa} = weatherData
   const classes = useStyles();
 
   return (
     <Grid item>
       <Card className={classes.card}>
-        <CardHeader avatar={avatar} title={dataTime} />
-        <CardContent>
-          <Typography>{dust}</Typography>
-        </CardContent>
+        <CardHeader title={tm} />
+          <CardContent>
+            <Typography>{avgTa}</Typography>
+          </CardContent>
       </Card>
     </Grid>
   );
 };
 
-export default DustCard;
+export default WeatherCard;

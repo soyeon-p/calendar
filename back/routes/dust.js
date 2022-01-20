@@ -10,8 +10,7 @@ const dustURL = `http://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureLI
 router.get('/', async (req, res, next) => {
   try {
     const { data } = await axios.get(dustURL);
-    res.json(data);
-
+    return res.json(data);
   } catch (err) {
     console.error(err);
     next(err);
