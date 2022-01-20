@@ -14,7 +14,7 @@ import {
 import axios from 'axios';
 import React, { useState, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
-import { weatherValueState, weatherDataState } from '../../Recoil/atoms';
+import { weatherValueState, weatherDataState, submitFormState } from '../../Recoil/atoms';
 import { useStyles } from '../../Styles/styles';
 import { cityList, temperatureList } from './WeatherList';
 import dayjs from 'dayjs';
@@ -24,7 +24,8 @@ const Filter = () => {
   const [,setWeatherData] = useRecoilState(weatherDataState);
   const [temperature, setTemperature] = useState(null)
   const [cityCode, setCityCode] = useState('');
-  const [, weatherValue] = useRecoilState(weatherValueState)
+  const [, setWeatherValue] = useRecoilState(weatherValueState)
+  const [, setSubmitForm] = useRecoilState(submitFormState)
 
   const onChangeCity = useCallback((e) => {
     setCityCode(e.target.value);
@@ -53,12 +54,13 @@ const Filter = () => {
     };
 
     e.preventDefault();
-    weatherValue({
+    setWeatherValue({
       temperature,
       cityName
     })
     fetchData();
-  }, [setWeatherData, weatherValue, cityCode, temperature]);
+    setSubmitForm(true)
+  }, [setWeatherData, setWeatherValue, setSubmitForm, cityCode, temperature]);
 
   return (
     <Box className={classes.box}>
