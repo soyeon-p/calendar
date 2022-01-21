@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import axios from 'axios';
 import React, { useState, useCallback } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { weatherValueState, weatherDataState, submitFormState } from '../../Recoil/atoms';
 import { useStyles } from '../../Styles/styles';
 import { cityList, temperatureList } from './WeatherList';
@@ -26,6 +26,7 @@ const Filter = () => {
   const [cityCode, setCityCode] = useState('');
   const [, setWeatherValue] = useRecoilState(weatherValueState)
   const [, setSubmitForm] = useRecoilState(submitFormState)
+  const resetWeatherData = useResetRecoilState(weatherDataState)
 
   const onChangeCity = useCallback((e) => {
     setCityCode(e.target.value);
@@ -37,7 +38,6 @@ const Filter = () => {
 
   const onSubmit = useCallback((e) => {    
     const cityName = cityList.find((cityData) => cityData.code === cityCode).name
-    
     const fetchData = async () => {
       const {
         data: {
@@ -54,13 +54,14 @@ const Filter = () => {
     };
 
     e.preventDefault();
+    resetWeatherData()
     setWeatherValue({
       temperature,
       cityName
     })
     fetchData();
     setSubmitForm(true)
-  }, [setWeatherData, setWeatherValue, setSubmitForm, cityCode, temperature]);
+  }, [resetWeatherData, setWeatherData, setWeatherValue, setSubmitForm, cityCode, temperature]);
 
   return (
     <Box className={classes.box}>

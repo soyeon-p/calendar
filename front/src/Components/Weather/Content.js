@@ -24,7 +24,7 @@ const Content = () => {
             ))}
           </Grid>
         </>
-      ) : <Typography>loading...</Typography>}
+      ) : <Typography variant='h3' color='primary'>Loading...</Typography>}
     </>
   );
 };
