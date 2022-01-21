@@ -5,15 +5,13 @@ import { weatherDataState, weatherValueState } from '../../Recoil/atoms';
 import WeatherCard from './WeatherCard';
 import { temperatureList } from './WeatherList';
 
-
-
 const Content = () => {
   const weatherData = useRecoilValue(weatherDataState);
   const weatherValue = useRecoilValue(weatherValueState);
 
   return (
     <>
-      {weatherData && (
+      {weatherData ? (
         <>
           <Typography variant="h4" color="primary">
             {`${temperatureList.find((data) => data.value === weatherValue.temperature).title} (${
@@ -26,7 +24,7 @@ const Content = () => {
             ))}
           </Grid>
         </>
-      )}
+      ) : <Typography variant='h3' color='primary'>Loading...</Typography>}
     </>
   );
 };

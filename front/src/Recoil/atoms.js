@@ -25,6 +25,11 @@ export const weatherValueState = atom({
   default: null
 })
 
+export const submitFormState = atom({
+  key: 'submitFormState',
+  default: false
+})
+
 //일정 모달창
 export const toggleModalState = atom({
   key: "toggleModalState",
