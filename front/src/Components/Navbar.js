@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useStyles } from '../Styles/styles';
 
-const listItem = ['Home', 'Weather', 'Corona', 'Dust'];
+const listItem = ['Home', 'Weather', 'Dust'];
 
 const Navbar = () => {
   const classes = useStyles();

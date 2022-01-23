@@ -6,7 +6,6 @@ import { theme } from './Styles/theme';
 import Home from './Pages/Home';
 import Dust from './Pages/Dust';
 import Weather from './Pages/Weather';
-import Corona from './Pages/Corona';
 import { RecoilRoot } from 'recoil';
 
 function App() {
@@ -17,7 +16,6 @@ function App() {
           <Routes>
             <Route path="/Home" element={<Home />} />
             <Route path="/Weather" element={<Weather />} />
-            <Route path="/Corona" element={<Corona />} />
             <Route path="/dust" element={<Dust />} />
           </Routes>
         </Layout>
