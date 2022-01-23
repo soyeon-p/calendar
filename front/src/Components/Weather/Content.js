@@ -19,7 +19,7 @@ const Content = () => {
             })`}
           </Typography>
           <Grid container spacing={3}>
-            {weatherData.map((weather) => (
+            {weatherData.slice(0).reverse().map((weather) => (
               <WeatherCard key={weather.tm} weatherData={weather} />
             ))}
           </Grid>
