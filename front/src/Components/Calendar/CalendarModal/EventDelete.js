@@ -1,6 +1,7 @@
 import { React, useCallback } from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import axios from "axios";
 import {
   toggleModalState,
   eventListState,
@@ -14,6 +15,19 @@ export default function EventDelete() {
   const setToggleModal = useSetRecoilState(toggleModalState);
 
   const onSubmit = useCallback(() => {
+    async function deleteEventData() {
+      await axios
+        .delete(`http://localhost:4000/events/${selectedEventId}`, {})
+        .then(function (response) {
+          if (response.data.success) {
+          }
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    }
+    deleteEventData();
+
     setEventList(
       eventList.filter((event) => event.id.toString() !== selectedEventId)
     );
