@@ -1,6 +1,7 @@
-import { React, useCallback } from "react";
+import { React, useCallback, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import axios from "axios";
 import {
   selectedDateState,
   toggleModalState,
@@ -21,9 +22,28 @@ export default function EventCreate() {
   const selectedDate = useRecoilValue(selectedDateState);
   const setToggleModal = useSetRecoilState(toggleModalState);
 
-  const disabled = ModalState(eventStartTime, eventEndTime, eventTitle)
+  const disabled = ModalState(eventStartTime, eventEndTime, eventTitle);
 
   const onSubmit = useCallback(() => {
+    async function createEventData() {
+      await axios
+        .post(`http://localhost:4000/events`, {
+          id: Date.now(),
+          title: eventTitle,
+          start: selectedDate + calcEventTime(eventStartTime),
+          end: selectedDate + calcEventTime(eventEndTime),
+        })
+        .then(function (response) {
+          if (response.data.success) {
+            console.log("successful");
+          }
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    }
+
+    createEventData();
     setEventList([
       ...eventList,
       {

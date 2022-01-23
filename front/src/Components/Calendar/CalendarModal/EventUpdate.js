@@ -1,6 +1,7 @@
 import { React, useCallback } from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import axios from "axios";
 import {
   selectedDateState,
   toggleModalState,
@@ -23,20 +24,38 @@ export default function EventUpdate() {
   const selectedEventId = useRecoilValue(selectedEventIdState);
   const setToggleModal = useSetRecoilState(toggleModalState);
 
-  const disabled = ModalState(eventStartTime, eventEndTime, eventTitle)
+  const disabled = ModalState(eventStartTime, eventEndTime, eventTitle);
 
   const onSubmit = useCallback(() => {
+    async function updateEventData() {
+      await axios
+        .put(`http://localhost:4000/events/${selectedEventId}`, {
+          id: selectedEventId,
+          title: eventTitle,
+          start: selectedDate + calcEventTime(eventStartTime),
+          end: selectedDate + calcEventTime(eventEndTime),
+        })
+        .then(function (response) {
+          if (response.data.success) {
+          }
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    }
+    updateEventData();
+
     setEventList(
-      eventList.map((event) =>
-        event.id.toString() === selectedEventId
+      eventList.map((event) => {
+        return event.id.toString() === selectedEventId
           ? {
               ...event,
               title: eventTitle,
               start: selectedDate + calcEventTime(eventStartTime),
               end: selectedDate + calcEventTime(eventEndTime),
             }
-          : event
-      )
+          : event;
+      })
     );
 
     setToggleModal((prev) => !prev);

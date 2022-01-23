@@ -6,6 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { Box } from "@material-ui/core";
 import { useStyles } from "../../Styles/styles";
 import CalendarModal from "./CalendarModal";
+
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import {
   toggleModalState,
