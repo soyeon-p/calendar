@@ -1,5 +1,5 @@
 const express = require('express');
-const Calendar= require('../models/calendar');
+const Calendar= require('../models/Calendar');
 
 
 const router = express.Router();
@@ -17,9 +17,9 @@ router.route('/')
   .post(async (req, res, next) => {
     try {
       const calendar = await Calendar.create({
-        shedule: req.body.name,
-        start: req.body.age,
-        finish: req.body.married,
+        schedule: req.body.schedule,
+        start: req.body.start,
+        finish: req.body.finish,
       });
       console.log(calendar);
       res.status(201).json(calendar);
