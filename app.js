@@ -10,15 +10,15 @@ const redis = require('redis');
 const RedisStore = require('connect-redis')(session);
 
 dotenv.config();
-const redisClient = redis.createClient({
-  url: 'redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}',
-  password:process.env.REDIS_PASSWORD,
-});
+// const redisClient = redis.createClient({
+//   url: 'redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}',
+//   password:process.env.REDIS_PASSWORD,
+// });
 
 const { sequelize } = require('./models');
 const indexRouter = require('./routes');
 const calendarsRouter = require('./routes/calendars');
-const logger = require('/logger');
+// const logger = require('/logger');
 
 const app = express();
 app.set('port', process.env.PORT || 3001);
@@ -57,7 +57,7 @@ const sessionOption = {
     httpOnly: true,
     secure: false,
   },
-  store: new RedisStore({ client: redisClient }),
+  // store: new RedisStore({ client: redisClient }),
 };
 if (process.env.NODE_ENV === 'production') {
   sessionOption.proxy = true;

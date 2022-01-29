@@ -1,5 +1,5 @@
 const app = require('./app');
 
-app.listen(app.get('port'), () => {
-  console.log(app.get('port'), '번 포트에서 대기중');
+app.listen(80, () => {
+  console.log(80, '번 포트에서 대기중');
 });
